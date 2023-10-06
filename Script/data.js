@@ -11,14 +11,14 @@ const tasksStr = `[
       "image": "https://cdn.pixabay.com/photo/2015/07/27/20/16/book-863418_1280.jpg",
       "description": "Spend an hour reading a new novel or a self-help book.",
       "deadline": "2023-10-12",
-      "importance": 4
+      "importance": 3
   },
   {
       "taskName": "Write a Journal Entry",
       "image": "https://cdn.pixabay.com/photo/2016/11/29/13/46/book-1869969_1280.jpg",
       "description": "Reflect on your day and write a journal entry about your thoughts and experiences.",
       "deadline": "2023-10-09",
-      "importance": 3
+      "importance": 0
   },
   {
       "taskName": "Call Mom",
@@ -32,21 +32,21 @@ const tasksStr = `[
       "image": "https://cdn.pixabay.com/photo/2015/09/16/20/10/dough-943245_1280.jpg",
       "description": "Experiment with cooking a new recipe for dinner tonight.",
       "deadline": "2023-10-11",
-      "importance": 4
+      "importance": 0
   },
   {
       "taskName": "Practice Meditation",
       "image": "https://cdn.pixabay.com/photo/2013/05/12/18/55/balance-110850_1280.jpg",
       "description": "Take 15 minutes to practice mindfulness meditation and relax your mind.",
       "deadline": "2023-10-14",
-      "importance": 5
+      "importance": 3
   },
   {
       "taskName": "Work on Creative Project",
       "image": "https://cdn.pixabay.com/photo/2015/01/09/11/11/startup-594127_1280.jpg",
       "description": "Spend time working on your art, craft, or any creative project you enjoy.",
       "deadline": "2023-10-13",
-      "importance": 4
+      "importance": 0
   },
   {
       "taskName": "Language Learning",
