@@ -27,7 +27,7 @@ tasksArr.forEach((task) => {
                   <i
                     class="bi bi-exclamation-triangle-fill me-1 icon-custom"></i>
                   Priority level:
-                  <button class="btn btn-success ms-1 btn-sm imp-btn"><span class="imp">${task.importance}</span></button>
+                  <button class="btn btn-success ms-1 btn-sm border-0 imp-btn"><span class="imp">${task.importance}</span></button>
                 </p>
 
                 <p >
@@ -51,8 +51,8 @@ tasksArr.forEach((task) => {
 
 let btns = document.querySelectorAll('.imp-btn');
 let impVal = document.querySelectorAll('.imp');
-// console.log(btns);
 
+changeColor();
 btns.forEach((btn, i) => {
   btn.addEventListener('click', function () {
     incImp(i);
@@ -66,8 +66,21 @@ function incImp(val) {
     tasksArr[val].importance = 0;
   }
   impVal[val].innerHTML = `${tasksArr[val].importance}`;
+  changeColor();
 }
-
+function changeColor() {
+  tasksArr.forEach((task, i) => {
+    if (task.importance <= 1) {
+      btns[i].style.backgroundColor = 'green';
+    } else if (task.importance <= 3) {
+      btns[i].style.backgroundColor = 'yellow';
+      btns[i].style.color = 'black';
+    } else {
+      btns[i].style.backgroundColor = 'red';
+      btns[i].style.color = 'white';
+    }
+  });
+}
 // if (tasksArr[i].importance >= 1) {
 //   btns[i].style.backgroundColor = 'green';
 // } else if (tasksArr[i].importance >= 3) {
