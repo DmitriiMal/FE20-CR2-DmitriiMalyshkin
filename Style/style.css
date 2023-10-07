@@ -42,12 +42,12 @@ img {
   font-size: 1.2rem;
 }
 
-.imp-btn {
+/* .imp-btn {
   transition: opacity 0.2s ease-in-out;
 }
 .imp-btn:hover {
   opacity: 0.8;
-}
+} */
 
 footer li i {
   border: 2px solid #fff;

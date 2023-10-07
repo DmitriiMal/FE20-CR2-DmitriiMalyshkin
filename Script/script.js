@@ -1,6 +1,11 @@
 let tasksArr = JSON.parse(tasksStr);
 // console.table(tasksArr);
 
+// Get values from local storage and update "tasksArr"
+if (localStorage.getItem('tasks')) {
+  tasksArr = JSON.parse(localStorage.getItem('tasks'));
+}
+
 const result = document.querySelector('#result');
 
 // Sends the cards into HTML
@@ -59,12 +64,15 @@ let btns = document.querySelectorAll('.imp-btn');
 function changeColor() {
   tasksArr.forEach((task, i) => {
     if (task.importance <= 1) {
-      btns[i].style.backgroundColor = 'green';
+      btns[i].classList.remove('btn-danger');
+      btns[i].classList.add('btn-success');
     } else if (task.importance <= 3) {
-      btns[i].style.backgroundColor = 'yellow';
+      btns[i].classList.remove('btn-success');
+      btns[i].classList.add('btn-warning');
       btns[i].style.color = 'black';
     } else {
-      btns[i].style.backgroundColor = 'red';
+      btns[i].classList.remove('btn-warning');
+      btns[i].classList.add('btn-danger');
       btns[i].style.color = 'white';
     }
   });
@@ -82,12 +90,15 @@ function incImp(val) {
 }
 // Adds event listeners to “importance” buttons
 function addEvent() {
-  // reassign buttons (this allous us to reuse the function by sorting)
+  // Reassign buttons (this allous us to reuse the function by sorting)
   btns = document.querySelectorAll('.imp-btn');
 
   btns.forEach((btn, i) => {
     btn.addEventListener('click', function () {
       incImp(i);
+
+      // Save values in local storage
+      localStorage.setItem('tasks', JSON.stringify(tasksArr));
     });
   });
 }
@@ -96,7 +107,7 @@ addEvent();
 // Attaches "Sort by priority" button
 const sortBtn = document.querySelector('#sort');
 
-// adds "Sort by priority" button the event listener and update the tasksArr
+// Adds "Sort by priority" button the event listener and update the "tasksArr"
 sortBtn.addEventListener('click', function () {
   let tasksSort = tasksArr.sort((a, b) => b.importance - a.importance);
   tasksArr = tasksSort;
@@ -105,4 +116,6 @@ sortBtn.addEventListener('click', function () {
   sendCard();
   addEvent();
   changeColor();
+  // Save sorting in local storage
+  localStorage.setItem('tasks', JSON.stringify(tasksArr));
 });
