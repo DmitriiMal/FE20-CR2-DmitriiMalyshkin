@@ -1,10 +1,11 @@
-const tasksArr = JSON.parse(tasksStr);
+let tasksArr = JSON.parse(tasksStr);
 // console.table(tasksArr);
 
 const result = document.querySelector('#result');
 
-function sendCard(arr) {
-  arr.forEach((task) => {
+// Sends the cards into HTML
+function sendCard() {
+  tasksArr.forEach((task) => {
     result.innerHTML += `
   <div>
           <div class="card shadow-lg my-card mb-4">
@@ -28,7 +29,7 @@ function sendCard(arr) {
                   <i
                     class="bi bi-exclamation-triangle-fill me-1 icon-custom"></i>
                   Priority level:
-                  <button class="btn btn-success ms-1 btn-sm border-0 imp-btn"><span class="imp">${task.importance}</span></button>
+                  <button class="btn btn-success ms-1 btn-sm border-0 imp-btn">${task.importance}</button>
                 </p>
 
                 <p >
@@ -50,31 +51,11 @@ function sendCard(arr) {
   `;
   });
 }
-sendCard(tasksArr);
+sendCard();
 
-const btns = document.querySelectorAll('.imp-btn');
-const impVal = document.querySelectorAll('.imp');
+let btns = document.querySelectorAll('.imp-btn');
 
-changeColor();
-
-function addEvent() {
-  btns.forEach((btn, i) => {
-    btn.addEventListener('click', function () {
-      incImp(i);
-      console.log(tasksArr[i].importance);
-    });
-  });
-}
-addEvent();
-
-function incImp(val) {
-  tasksArr[val].importance++;
-  if (tasksArr[val].importance == 6) {
-    tasksArr[val].importance = 0;
-  }
-  impVal[val].innerHTML = `${tasksArr[val].importance}`;
-  changeColor();
-}
+// Changes color of buttons depending of their values
 function changeColor() {
   tasksArr.forEach((task, i) => {
     if (task.importance <= 1) {
@@ -88,12 +69,40 @@ function changeColor() {
     }
   });
 }
+changeColor();
 
-document.querySelector('#sort').addEventListener('click', function () {
+// increases importance by 1 and reset to 0 after 5
+function incImp(val) {
+  tasksArr[val].importance++;
+  if (tasksArr[val].importance == 6) {
+    tasksArr[val].importance = 0;
+  }
+  btns[val].innerHTML = `${tasksArr[val].importance}`;
+  changeColor();
+}
+// Adds event listeners to “importance” buttons
+function addEvent() {
+  // reassign buttons (this allous us to reuse the function by sorting)
+  btns = document.querySelectorAll('.imp-btn');
+
+  btns.forEach((btn, i) => {
+    btn.addEventListener('click', function () {
+      incImp(i);
+    });
+  });
+}
+addEvent();
+
+// Attaches "Sort by priority" button
+const sortBtn = document.querySelector('#sort');
+
+// adds "Sort by priority" button the event listener and update the tasksArr
+sortBtn.addEventListener('click', function () {
   let tasksSort = tasksArr.sort((a, b) => b.importance - a.importance);
-  console.log(tasksSort);
+  tasksArr = tasksSort;
   result.innerHTML = '';
-  sendCard(tasksSort);
+
+  sendCard();
   addEvent();
   changeColor();
 });
